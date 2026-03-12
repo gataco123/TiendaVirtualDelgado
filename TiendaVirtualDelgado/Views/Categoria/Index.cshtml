@@ -1,0 +1,36 @@
+﻿
+@model List<TiendaVirtualDelgado.Models.Categoria>
+@{
+    <h2>Lista de Categorias</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Descripcion</td>
+                    <td>
+                        @if (!String.IsNullOrEmpty(item.Nombre))
+                        {
+                            <span class="text-success">si tiene</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">vacio</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
