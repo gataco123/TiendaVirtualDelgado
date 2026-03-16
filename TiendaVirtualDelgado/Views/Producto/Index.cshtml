@@ -10,6 +10,7 @@
             <th>Nombre</th>
             <th>Precio</th>
             <th>Stock</th>
+            <th>Categoria</th>
             <th>Estado</th>
         </tr>
     </thead>
@@ -20,6 +21,7 @@
                 <td>@item.Nombre</td>
                 <td>@item.Precio</td>
                 <td>@item.Stock</td>
+                <td>@item.Categoria?.Nombre</td>
                 <td>
                     @if(item.TieneStock())
                     {
