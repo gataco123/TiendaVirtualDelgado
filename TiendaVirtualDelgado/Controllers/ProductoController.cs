@@ -21,6 +21,50 @@ namespace TiendaVirtualDelgado.Controllers
                 .ToList();
 
             return View(productos);
-        }       
+        }
+
+        //formulario crear
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // guardar producto
+        [HttpPost]
+        public IActionResult Create(Producto producto)
+        {
+            _context.productos.Add(producto);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+        // formulario editar
+        public IActionResult Edit(int id)
+        {
+            var producto = _context.productos.Find(id);
+            ViewBag.Categorias = _context.categorias.ToList();
+            return View(producto);
+        }
+
+        // actualizar producto
+        [HttpPost]
+        public IActionResult Edit(Producto producto)
+        {
+            _context.productos.Update(producto);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //elinar producto
+        public IActionResult Delete(int id)
+        {
+            var producto = _context.productos.Find(id);
+            
+                _context.productos.Remove(producto);
+                _context.SaveChanges();
+            
+            return RedirectToAction("Index");
+        }
     }
 }

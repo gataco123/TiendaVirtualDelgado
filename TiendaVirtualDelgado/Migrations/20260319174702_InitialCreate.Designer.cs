@@ -11,7 +11,7 @@ using TiendaVirtualDelgado.Data;
 namespace TiendaVirtualDelgado.Migrations
 {
     [DbContext(typeof(TiendaContext))]
-    [Migration("20260312203110_InitialCreate")]
+    [Migration("20260319174702_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

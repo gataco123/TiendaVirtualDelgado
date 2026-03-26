@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using TiendaVirtualDelgado.Models;
+
+
 namespace TiendaVirtualDelgado.Data
 {
     public class TiendaContext : DbContext
@@ -9,9 +10,9 @@ namespace TiendaVirtualDelgado.Data
             : base(options)
         {
         }
-        public DbSet<Producto> productos { get; set; }
-        public DbSet<Categoria> categorias { get; set; }
-        public DbSet<Usuario> usuarios { get; set; }
+        public DbSet<Producto>productos{ get; set; }
+        public DbSet<Categoria>categorias{ get; set; }
+        public DbSet<Usuario>usuarios{ get; set; }
     }
 }
 
