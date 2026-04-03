@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TiendaVirtualDelgado.Models;
-using TiendaVirtualDelgado.Models;
 
 namespace TiendaVirtualDelgado.Models
 {

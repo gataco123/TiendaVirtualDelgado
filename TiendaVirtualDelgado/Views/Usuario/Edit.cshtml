@@ -1,0 +1,30 @@
+﻿@model TiendaVirtualDelgado.Models.Usuario
+
+<div class="container mt-4"
+    <h2>Editar Usuario</h2>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label>Nombre</label>
+            <input asp-for="Nombre" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Correo</label>
+            <input asp-for="Correo" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Rol</label>
+            <select asp-for="Rol" class="form-control">
+                <option value="Admin">Administrador</option>
+                <option value="Cajero">Cajero</option>
+                <option value="Bodeguero">Bodeguero</option>
+                <option value="Cliente">Cliente</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Celular</label>
+            <input asp-for="Celular" class="form-control" />
+        </div>
+        <button class="btn btn-primary">Actualizar</button>
+        <a href="/Usuario" class="btn btn-secondary">Volver</a>
+    </form>

@@ -1,0 +1,32 @@
+﻿@model List<TiendaVirtualDelgado.Models.Usuario>
+
+<h2>LIsta de Usuarios</h2>
+
+<a class="btn btn-primary" href="/Usuario/Create">Crear Usuario</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Celular</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Nombre</td>
+                <td>@u.Correo</td>
+                <td>@u.Rol</td>
+                <td>@u.Celular</td>
+                <td>
+                    <a href="/Usuario/Edit/@u.Id">Editar</a>
+                    <a href="/Usuario/Delete/@u.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>   
+</table>
