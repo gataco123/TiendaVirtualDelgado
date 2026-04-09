@@ -1,71 +1,82 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 using TiendaVirtualDelgado.Data;
-using Microsoft.EntityFrameworkCore;
 using TiendaVirtualDelgado.Models;
 
-public class UsuarioController : Controller
+namespace TiendaVirtualBenavides.Controllers
 {
-    private readonly TiendaContext _context;
-
-    public UsuarioController(TiendaContext context)
+    public class UsuarioController : Controller
     {
-        _context = context;
-    }
+        private readonly TiendaContext _context;
 
-    // 🔹 LISTAR USUARIOS (ADMIN)
-    public IActionResult Index()
-    {
-        /*var rol = HttpContext.Session.GetString("UsuarioRol");
-
-        if (rol != "Admin")
+        public UsuarioController(TiendaContext context)
         {
-            return Unauthorized();
-        }*/
+            _context = context;
+        }
 
-        var usuarios = _context.usuarios.ToList();
-        return View(usuarios);
-    }
+        // Listado de usuarios
+        public IActionResult Index()
+        {
+            var usuarios = _context.usuarios.ToList();
+            return View(usuarios);
+        }
 
-    // 🔹 CREAR
-    public IActionResult Create()
-    {
-        return View();
-    }
+        // GET: Mostrar formulario de creación
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-    [HttpPost]
-    public IActionResult Create(Usuario usuario)
-    {
-        _context.usuarios.Add(usuario);
-        _context.SaveChanges();
+        // POST: Guardar nuevo usuario con validación
+        [HttpPost]
+        public IActionResult Create(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.usuarios.Add(usuario);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            // Si el modelo no es válido, regresa a la vista para mostrar errores
+            return View(usuario);
+        }
 
-        return RedirectToAction("Index");
-    }
+        // GET: Mostrar formulario de edición
+        public IActionResult Edit(int id)
+        {
+            var usuario = _context.usuarios.Find(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);
+        }
 
-    // 🔹 EDITAR
-    public IActionResult Edit(int id)
-    {
-        var usuario = _context.usuarios.Find(id);
-        return View(usuario);
-    }
+        // POST: Actualizar usuario con validación
+        [HttpPost]
+        public IActionResult Edit(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.usuarios.Update(usuario);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            // Si hay errores (ej. correo inválido), regresa a la vista de edición
+            return View(usuario);
+        }
 
-    [HttpPost]
-    public IActionResult Edit(Usuario usuario)
-    {
-        _context.usuarios.Update(usuario);
-        _context.SaveChanges();
-
-        return RedirectToAction("Index");
-    }
-
-    // 🔹 ELIMINAR
-    public IActionResult Delete(int id)
-    {
-        var usuario = _context.usuarios.Find(id);
-
-        _context.usuarios.Remove(usuario);
-        _context.SaveChanges();
-
-        return RedirectToAction("Index");
+        // POST: Eliminar usuario
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var usuario = _context.usuarios.Find(id);
+            if (usuario != null)
+            {
+                _context.usuarios.Remove(usuario);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

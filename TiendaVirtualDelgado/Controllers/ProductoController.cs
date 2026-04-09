@@ -26,6 +26,7 @@ namespace TiendaVirtualDelgado.Controllers
         //formulario crear
         public IActionResult Create()
         {
+            ViewBag.Categorias = _context.categorias.ToList();
             return View();
         }
 
