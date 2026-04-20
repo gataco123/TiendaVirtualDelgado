@@ -1,36 +1,32 @@
 ﻿
-@model List<TiendaVirtualDelgado.Models.Categoria>
-@{
-    <h2>Lista de Categorias</h2>
+@model IEnumerable<TiendaVirtualDelgado.Models.Categoria>
 
-    <table class="table">
-        <thead>
+<h2>Lista de Categorias</h2>
+
+<a class="btn btn-success mb-3" href="/Categoria/Create">+ Nueva Categoria</a>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Estado</th>
+                <td>@c.Id</td>
+                <td>@c.Nombre</td>
+                <td>@c.Descripcion</td> 
+                <td>@c.Estado</td>
+                <td>
+                    <a class="btn btn-warning" href="/Categoria/Edit/@c.Id">Editar</a>
+                    <a class="btn btn-danger" href="/Categoria/Delete/@c.Id">Eliminar</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Nombre</td>
-                    <td>@item.Descripcion</td>
-                    <td>
-                        @if (!String.IsNullOrEmpty(item.Nombre))
-                        {
-                            <span class="text-success">si tiene</span>
-                        }
-                        else
-                        {
-                            <span class="text-danger">vacio</span>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>

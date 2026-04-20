@@ -11,8 +11,8 @@ using TiendaVirtualDelgado.Data;
 namespace TiendaVirtualDelgado.Migrations
 {
     [DbContext(typeof(TiendaContext))]
-    [Migration("20260403154727_MigracionInicial.")]
-    partial class MigracionInicial
+    [Migration("20260420221701_primer_migracion")]
+    partial class primer_migracion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,10 @@ namespace TiendaVirtualDelgado.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Celular")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Correo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -95,10 +99,6 @@ namespace TiendaVirtualDelgado.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rol")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("celular")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
