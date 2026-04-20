@@ -17,6 +17,11 @@ namespace TiendaVirtualBenavides.Controllers
         // Listado de usuarios
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var usuarios = _context.usuarios.ToList();
             return View(usuarios);
         }
@@ -24,6 +29,10 @@ namespace TiendaVirtualBenavides.Controllers
         // GET: Mostrar formulario de creación
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -44,6 +53,10 @@ namespace TiendaVirtualBenavides.Controllers
         // GET: Mostrar formulario de edición
         public IActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+{
+    return RedirectToAction("Index", "Login");
+}
             var usuario = _context.usuarios.Find(id);
             if (usuario == null)
             {

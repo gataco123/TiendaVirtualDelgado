@@ -16,6 +16,11 @@ namespace TiendaVirtualDelgado.Controllers
         }
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var productos = _context.productos
                 .Include(p => p.Categoria)
                 .ToList();
@@ -26,6 +31,11 @@ namespace TiendaVirtualDelgado.Controllers
         //formulario crear
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             ViewBag.Categorias = _context.categorias.ToList();
             return View();
         }
@@ -34,6 +44,7 @@ namespace TiendaVirtualDelgado.Controllers
         [HttpPost]
         public IActionResult Create(Producto producto)
         {
+           
             _context.productos.Add(producto);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -43,6 +54,11 @@ namespace TiendaVirtualDelgado.Controllers
         // formulario editar
         public IActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var producto = _context.productos.Find(id);
             ViewBag.Categorias = _context.categorias.ToList();
             return View(producto);
@@ -52,6 +68,10 @@ namespace TiendaVirtualDelgado.Controllers
         [HttpPost]
         public IActionResult Edit(Producto producto)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             _context.productos.Update(producto);
             _context.SaveChanges();
             return RedirectToAction("Index");
