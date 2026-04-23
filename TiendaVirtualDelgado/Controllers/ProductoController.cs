@@ -80,6 +80,17 @@ namespace TiendaVirtualDelgado.Controllers
         //elinar producto
         public IActionResult Delete(int id)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol != "admin")
+            {
+                return RedirectToAction("Index");
+            }
+
             var producto = _context.productos.Find(id);
             
                 _context.productos.Remove(producto);

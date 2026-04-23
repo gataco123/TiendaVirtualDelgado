@@ -15,6 +15,10 @@ namespace TiendaVirtualDelgado.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
@@ -28,5 +32,7 @@ namespace TiendaVirtualDelgado.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }

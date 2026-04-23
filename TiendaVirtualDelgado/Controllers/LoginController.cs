@@ -28,7 +28,7 @@ namespace TiendaVirtualDelgado.Controllers
                 HttpContext.Session.SetString("Usuario", usuario.Nombre);
                 HttpContext.Session.SetString("Rol", usuario.Rol);
 
-                return RedirectToAction("Index", "Producto");
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.Error = "Credenciales incorrectas";
