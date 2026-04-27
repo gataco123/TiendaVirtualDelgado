@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TiendaVirtualDelgado.Data;
+using TiendaVirtualDelgado.Helpers;
 using TiendaVirtualDelgado.Models;
 
 namespace TiendaVirtualBenavides.Controllers
@@ -40,14 +41,10 @@ namespace TiendaVirtualBenavides.Controllers
         [HttpPost]
         public IActionResult Create(Usuario usuario)
         {
-            if (ModelState.IsValid)
-            {
-                _context.usuarios.Add(usuario);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            // Si el modelo no es válido, regresa a la vista para mostrar errores
-            return View(usuario);
+            usuario.Clave = HashHelper.ObtenerHash(usuario.Clave);
+            _context.usuarios.Add(usuario);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Mostrar formulario de edición

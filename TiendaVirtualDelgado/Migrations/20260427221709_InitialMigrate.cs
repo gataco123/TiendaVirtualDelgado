@@ -5,7 +5,7 @@
 namespace TiendaVirtualDelgado.Migrations
 {
     /// <inheritdoc />
-    public partial class primer_migracion : Migration
+    public partial class InitialMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,8 @@ namespace TiendaVirtualDelgado.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rol = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Celular = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Celular = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Clave = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

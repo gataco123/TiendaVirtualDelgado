@@ -21,5 +21,10 @@ namespace TiendaVirtualDelgado.Models
         [RegularExpression(@"^3\d{9}$",
             ErrorMessage = "El celular debe empezar con 3 y tener 10 dígitos")]
         public string Celular { get; set; }
+
+
+        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        public string Clave { get; set; }
+
     }
 }
