@@ -32,7 +32,7 @@ namespace TiendaVirtualBenavides.Controllers
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
-                return RedirectToAction("Index", "Login");
+               return RedirectToAction("Index", "Login");
             }
             return View();
         }
@@ -41,10 +41,14 @@ namespace TiendaVirtualBenavides.Controllers
         [HttpPost]
         public IActionResult Create(Usuario usuario)
         {
-            usuario.Clave = HashHelper.ObtenerHash(usuario.Clave);
-            _context.usuarios.Add(usuario);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            if(ModelState.IsValid){
+                usuario.Clave = HashHelper.ObtenerHash(usuario.Clave);
+                _context.usuarios.Add(usuario);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(usuario);
+           
         }
 
         // GET: Mostrar formulario de edición

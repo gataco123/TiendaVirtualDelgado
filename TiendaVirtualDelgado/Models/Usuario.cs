@@ -19,11 +19,12 @@ namespace TiendaVirtualDelgado.Models
         [Required(ErrorMessage = "El número de celular es obligatorio")]
         [Phone(ErrorMessage = "Formato de teléfono no válido")]
         [RegularExpression(@"^3\d{9}$",
-            ErrorMessage = "El celular debe empezar con 3 y tener 10 dígitos")]
+        ErrorMessage = "El celular debe empezar con 3 y tener 10 dígitos")]
         public string Celular { get; set; }
 
 
-        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        [Required]
+        [MinLength(4,ErrorMessage = "Minimo 4 caracteres")]
         public string Clave { get; set; }
 
     }
