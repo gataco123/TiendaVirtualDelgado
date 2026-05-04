@@ -4,7 +4,7 @@
 
     <h2>Crear Producto</h2>
 
-    <form asp-action="Create" method="post">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label class="form-label">Nombre</label>
@@ -34,9 +34,15 @@
             </select>
         </div>
 
-        <button class="btn btn-success">Guardar</button>
-        <a href="/Producto" class="btn btn-secondary">Volver</a>
+        
+            <div class="mb-3">
+                <label>Imagen</label>
+                <input type="file" name="imagen" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
 
-    </form>
+        
+    
 
 </div>

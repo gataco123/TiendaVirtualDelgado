@@ -28,5 +28,7 @@ namespace TiendaVirtualDelgado.Models
         {
             return Stock > 0;
         }
+
+        public string? ImagenUrl { get; set; }
     }
 }

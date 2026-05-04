@@ -42,8 +42,18 @@ namespace TiendaVirtualDelgado.Controllers
 
         // guardar producto
         [HttpPost]
-        public IActionResult Create(Producto producto)
+        public IActionResult Create(Producto producto, IFormFile imagen)
         {
+            if (imagen != null)
+            {
+                var ruta = Path.Combine(Directory.GetCurrentDirectory(),
+                    "wwwroot/images", imagen.FileName);
+                using (var stream = new FileStream(ruta, FileMode.Create))
+                {
+                    imagen.CopyTo(stream);
+                }
+                producto.ImagenUrl = "/images/" + imagen.FileName;
+            }
            
             _context.productos.Add(producto);
             _context.SaveChanges();
@@ -65,17 +75,44 @@ namespace TiendaVirtualDelgado.Controllers
         }
 
         // actualizar producto
+        // ACTUALIZAR PRODUCTO
         [HttpPost]
-        public IActionResult Edit(Producto producto)
+        public IActionResult Edit(Producto producto, IFormFile imagen)
         {
-            if (HttpContext.Session.GetString("Usuario") == null)
+            var productoBD = _context.productos.Find(producto.Id);
+            if (productoBD == null)
+                return NotFound();
+
+            // Actualizar datos normales
+            productoBD.Nombre = producto.Nombre;
+            productoBD.Precio = producto.Precio;
+            productoBD.Stock = producto.Stock;
+            productoBD.CategoriaId = producto.CategoriaId;
+
+            // Si sube nueva imagen
+            if (imagen != null)
             {
-                return RedirectToAction("Index", "Login");
+                var carpeta = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+                if (!Directory.Exists(carpeta))
+                {
+                    Directory.CreateDirectory(carpeta);
+                }
+
+                var ruta = Path.Combine(carpeta, imagen.FileName);
+
+                using (var stream = new FileStream(ruta, FileMode.Create))
+                {
+                    imagen.CopyTo(stream);
+                }
+
+                productoBD.ImagenUrl = "/images/" + imagen.FileName;
             }
-            _context.productos.Update(producto);
+
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         //elinar producto
         public IActionResult Delete(int id)
