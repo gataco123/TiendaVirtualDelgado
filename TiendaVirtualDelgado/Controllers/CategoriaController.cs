@@ -84,6 +84,10 @@ namespace TiendaVirtualDelgado.Controllers
         public IActionResult Delete(int id)
         {
             var categoria = _context.categorias.Find(id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
 
             _context.categorias.Remove(categoria);
             _context.SaveChanges();
@@ -92,6 +96,7 @@ namespace TiendaVirtualDelgado.Controllers
         }
     }
 }
+
 
 
 

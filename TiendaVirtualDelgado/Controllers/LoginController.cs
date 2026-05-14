@@ -27,7 +27,7 @@ namespace TiendaVirtualDelgado.Controllers
             if (usuario != null)
             {
                 HttpContext.Session.SetString("Usuario", usuario.Nombre);
-                HttpContext.Session.SetString("Rol", usuario.Rol);
+                HttpContext.Session.SetString("Clave", usuario.Clave);
 
                 return RedirectToAction("Index", "Home");
             }
